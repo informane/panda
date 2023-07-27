@@ -44,7 +44,7 @@
                     <input type="hidden" name="Answer[<?php echo $i ?>][id]" value="<?php echo $answer->id ?>">
                     <div class="col-md-6">
                         <label for="Answer[<?php echo $i ?>][text]" class="form-label">Text</label>
-                        <input type="text" name="Answer[<?php echo $i ?>][text]" value="<?php echo $answer->text ?>" class="form-control">
+                        <input type="text" name="Answer[<?php echo $i ?>][text]" value='<?php echo $answer->text ?>' class="form-control">
                         <?php if (isset($params['answersValidErrors'][$i]['errors']['text'])): ?><div class="alert alert-danger" role="alert"><?php echo implode('<br/>', $params['answersValidErrors'][$i]['errors']['text']) ?></div><?php endif; ?>
 
                     </div>
@@ -62,7 +62,7 @@
                     <input type="hidden" name="Answer[<?php echo $i ?>][id]" value="<?php echo $answer->id ?>">
                     <div class="col-md-6">
                         <label for="Answer[<?php echo $i ?>][text]" class="form-label">Text</label>
-                        <input type="text" name="Answer[<?php echo $i ?>][text]" value="<?php echo $answer->text ?>" class="form-control">
+                        <input type="text" name="Answer[<?php echo $i ?>][text]" value='<?php echo $answer->text ?>' class="form-control">
                         <?php if (isset($params['answersValidErrors'][$i]['errors']['text'])): ?><div class="alert alert-danger" role="alert"><?php echo implode('<br/>', $params['answersValidErrors'][$i]['errors']['text']) ?></div><?php endif; ?>
 
                     </div>

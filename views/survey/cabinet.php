@@ -21,7 +21,7 @@
     <div class="container">
         <div class="row border p-3">
             <div class="col-1"><?php echo $question->id ?></div>
-            <div class="col-3"><?php echo $question->text ?></div>
+            <div class="col-3 text-break"><?php echo nl2br($question->text) ?></div>
             <div class="col-2"><?php echo $question->date_created ?></div>
             <div class="col-2"><?php echo \models\Question::STATUSES[$question->status] ?></div>
             <div class="col-1"><a href="/survey/view?id=<?php echo $question->id ?>"><button class="btn btn-success">View</button></a></div>

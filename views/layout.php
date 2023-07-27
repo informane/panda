@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <title><?php echo $title ?></title>
     <script
             src="https://code.jquery.com/jquery-3.7.0.min.js"

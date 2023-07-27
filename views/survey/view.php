@@ -21,7 +21,7 @@ $answers=$params['answers'];
         <div class="row border p-3">
             <div class="col-sm-12 col-lg-8">
                 <h5>Text</h5>
-                <div><?php echo $question->text ?></div>
+                <div class="text-break"><?php echo nl2br($question->text) ?></div>
             </div>
             <div class="col-sm-12 col-lg-2">
                 <h5>Status</h5>
@@ -47,7 +47,7 @@ $answers=$params['answers'];
         <?php foreach ($answers as $i=>$answer): ?>
             <div class='row border p-3'>
                 <div class="col-sm-3 col-lg-2"><?php echo $i+1 ?></div>
-                <div class="col-sm-6 col-lg-7"><?php echo $answer->text ?></div>
+                <div class="col-sm-6 col-lg-7 text-break"><?php echo nl2br($answer->text) ?></div>
                 <div class="col-sm-3 col-lg-3"><?php echo $answer->votes_number ?></div>
             </div>
         <?php endforeach; ?>

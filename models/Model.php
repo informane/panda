@@ -18,7 +18,7 @@ class Model{
 
     public function __get($name){
         if (key_exists($name, $this->attributes)){
-            return htmlspecialchars($this->attributes[$name]);
+            return htmlspecialchars($this->attributes[$name],ENT_NOQUOTES);
         } else {
             return $this->$name;
         }
@@ -38,7 +38,7 @@ class Model{
 
     public function sanitize(){
         foreach ($this->attributes as $attrName=>$attrValue){
-            $this->attributes[$attrName]=filter_var($attrValue, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $this->attributes[$attrName]=htmlspecialchars($attrValue, ENT_NOQUOTES);
         }
     }
 
