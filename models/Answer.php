@@ -20,18 +20,18 @@ class Answer extends Model{
 
     public function rules()
     {
-        return [
+        return array_merge(parent::rules(),[
             [
                 'fields' => ['votes_number', 'text'],
                 'rule' => 'required',
                 'message' => 'field :name is required'
             ],
             [
-                'fields' => ['text'],
-                'rule' => 'unique',
-                'message' => 'that :name is already taken as an answer'
+                'fields' => ['votes_number'],
+                'rule' => 'numeric',
+                'message' => 'field :name must be numeric'
             ],
-        ];
+        ]);
     }
 
     public static function sync($question_id, $answers){

@@ -18,7 +18,7 @@ class Model{
 
     public function __get($name){
         if (key_exists($name, $this->attributes)){
-            return $this->attributes[$name];
+            return htmlspecialchars($this->attributes[$name]);
         } else {
             return $this->$name;
         }
@@ -36,7 +36,14 @@ class Model{
         return [];
     }
 
+    public function sanitize(){
+        foreach ($this->attributes as $attrName=>$attrValue){
+            $this->attributes[$attrName]=filter_var($attrValue, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        }
+    }
+
     public function validate(){
+        $this->sanitize();
         $messages=['errors'=>[]];
         foreach ($this->rules() as $rule){
             if ($rule['rule'] == 'required'){
@@ -48,8 +55,22 @@ class Model{
             }
             if ($rule['rule'] == 'unique'){
                 foreach ($rule['fields'] as $field){
-                    $user=get_called_class()::activeRecord()->select([$field,'id'])->where([$field=>$this->$field])->one();
+                    $user=get_called_class()::activeRecord()->select([$field, 'id'])->where([$field=>$this->$field])->one();
                     if ($user && $user->id != $this->id){
+                        $messages['errors'][$field][]=str_replace(':name', $field, $rule['message']);
+                    }
+                }
+            }
+            if ($rule['rule'] == 'email'){
+                foreach ($rule['fields'] as $field){
+                    if (!filter_var($this->$field, FILTER_VALIDATE_EMAIL)){
+                        $messages['errors'][$field][]=str_replace(':name', $field, $rule['message']);
+                    }
+                }
+            }
+            if ($rule['rule'] == 'numeric'){
+                foreach ($rule['fields'] as $field){
+                    if (!filter_var($this->$field, FILTER_VALIDATE_INT)){
                         $messages['errors'][$field][]=str_replace(':name', $field, $rule['message']);
                     }
                 }
@@ -70,8 +91,7 @@ class Model{
 
     public function save(){
         if ($this->id != null && $this->id != 0 && $this->id != ''){
-            if(!$this::activeRecord()->update($this->attributes)->where(['id'=>$this->id])->execute())
-            {
+            if (!$this::activeRecord()->update($this->attributes)->where(['id'=>$this->id])->execute()){
                 return false;
             }
             return $this->id;

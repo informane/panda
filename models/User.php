@@ -15,7 +15,7 @@ class User extends Model{
 
     public function rules()
     {
-        return [
+        return array_merge(parent::rules(),[
             [
                 'fields' => ['email', 'password'],
                 'rule' => 'required',
@@ -26,7 +26,12 @@ class User extends Model{
                 'rule' => 'unique',
                 'message' => 'field :name is already taken'
             ],
-        ];
+            [
+                'fields' => ['email'],
+                'rule' => 'email',
+                'message' => 'field :name is not valid email'
+            ],
+        ]);
     }
 
     public function save(){

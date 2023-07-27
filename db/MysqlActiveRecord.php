@@ -20,6 +20,7 @@ class MysqlActiveRecord implements ActiveRecord{
     protected $deletePart;
     protected $whereParams=[];
     protected $insertParams=[];
+    protected $updateParams=[];
 
     public function __construct($modelType){
         $this->modelType=$modelType;
@@ -39,6 +40,7 @@ class MysqlActiveRecord implements ActiveRecord{
         $this->deletePart='';
         $this->whereParams=[];
         $this->insertParams=[];
+        $this->updateParams=[];
     }
 
     public function select($fields=['*'])
@@ -150,7 +152,9 @@ class MysqlActiveRecord implements ActiveRecord{
         $this->queryType='update';
         $fieldParams=[];
         foreach ($fields as $fieldName=>$fieldValue){
-            $fieldParams[]="{$fieldName}='{$fieldValue}'";
+            $param='update_'.$fieldName;
+            $fieldParams[]="{$fieldName}=:{$param}";
+            $this->updateParams[$param]=$fieldValue;
         }
         $fieldParams=implode(', ', $fieldParams);
         $this->updatePart="update {$this->tableName} SET {$fieldParams} ";
@@ -175,14 +179,17 @@ class MysqlActiveRecord implements ActiveRecord{
         $result=false;
         if ($this->queryType == 'insert'){
             $this->sqlString=$this->insertPart;
+            var_dump($this->sqlString);
             $stmt=$pdo->prepare($this->sqlString);
             $stmt->execute($this->insertParams);
             $result=$pdo->lastInsertId();
         }
         if ($this->queryType == 'update'){
             $this->sqlString=$this->updatePart.$this->wherePart;
+            $sqlParams=array_replace($this->updateParams,$this->whereParams);
             $stmt=$pdo->prepare($this->sqlString);
-            $result=$stmt->execute($this->whereParams);
+
+            $result=$stmt->execute($sqlParams);
         }
         if ($this->queryType == 'delete'){
             $this->sqlString=$this->deletePart.$this->wherePart;

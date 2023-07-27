@@ -21,7 +21,7 @@ class Question extends Model{
 
 
     public function rules(){
-        return [
+        return array_merge(parent::rules(),[
             [
                 'fields' =>['status', 'text'],
                 'rule'   =>'required',
@@ -32,7 +32,7 @@ class Question extends Model{
                 'rule' => 'unique',
                 'message' => 'that :name is already taken as a question'
             ],
-        ];
+        ]);
     }
 
     public function save(){

@@ -12,7 +12,6 @@ class ApiController extends Controller{
     public function actionGetrandomsurvey($email, $password){
         $user=User::activeRecord()->select()->where(['email'=>$email, 'password'=>md5($password)])->one();
         if ($user){
-            $id=2;
             $questions=Question::activeRecord()->select(['id'])->where(['user_id'=>$user->id])->all();
             $ids=[];
             foreach ($questions as $question){
