@@ -5,8 +5,8 @@ RewriteEngine On
 RewriteRule ^public/ - [L]
 
 # Static resources if they exist
-RewriteCond %{DOCUMENT_ROOT}/dist/assets/$1 -f
-RewriteRule (.+) dist/assets/$1 [L]
+RewriteCond %{DOCUMENT_ROOT}/assets/$1 -f
+RewriteRule (.+) assets/$1 [L]
 
 # Route all other requests
 #RewriteCond %{REQUEST_FILENAME} !-d

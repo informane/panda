@@ -23,7 +23,8 @@ class MysqlActiveRecord implements ActiveRecord{
 
     public function __construct($modelType){
         $this->modelType=$modelType;
-        $this->tableName=strtolower(basename($this->modelType));
+        $modelTypeArr=explode('\\',$this->modelType);
+        $this->tableName=strtolower(array_pop($modelTypeArr));
     }
 
     protected function clearSql(){

@@ -15,7 +15,7 @@
             <div class="container-fluid">
                     <ul class="navbar-nav mb-2 mb-lg-0 text-end">
 
-                        <?php if($_SESSION['login']!=null): ?>
+                        <?php if(isset($_SESSION['login'])): ?>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/page/logout">Logout</a>
                             </li>
