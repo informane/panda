@@ -15,7 +15,7 @@
   <b>Example url</b> for account with email=dev.romul@gmail.com and password=123 : <br>
   <b>http://panda/api/getrandomsurvey?email=dev.romul@gmail.com&password=123</b> <br><br>
   <b>Example response (json format):</b> <br>
-  <b>{"Who was the first astronaut who set foot on a moon":[{"answer_text":"Neil Armstrong","votes_number":333},{"answer_text":"Deke Slayton","votes_number":222},{"answer_text":"Mae Jemison","votes_number":111}]}</b>
+  {"Who was the first astronaut who set foot on a moon":[{"answer_text":"Neil Armstrong","votes_number":333},{"answer_text":"Deke Slayton","votes_number":222},{"answer_text":"Mae Jemison","votes_number":111}]}
 </li>
 </ul>
 </p>
