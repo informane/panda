@@ -7,7 +7,7 @@ use routers\Router;
 use facades\Facade;
 
 $facade = new Facade($config);
-$facade->dbConnection->connect();
+$facade->connectToDb();
 
 $router = new Router();
 $router();
