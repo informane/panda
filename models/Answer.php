@@ -35,15 +35,17 @@ class Answer extends Model{
     }
 
     public static function sync($question_id, $answers){
+
+        foreach ($answers as $i=>$answer){
+            $answers[$i]->save();
+        }
         $existingAnswers=Answer::activeRecord()->select()->where(['question_id'=>$question_id])->all();
         foreach ($existingAnswers as $existingAnswer){
             if (!in_array($existingAnswer, $answers)){
                 Answer::delete($existingAnswer->id);
             }
         }
-        foreach ($answers as $answer){
-            $answer->save();
-        }
+
     }
 
 }
