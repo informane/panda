@@ -8,7 +8,7 @@
         </nav>
     </div>
     <div class="col-md-12 col-lg-10 col-xl-8 mx-auto bg-body-tertiary p-4 rounded">
-        <div class="col-12">
+        <div class="col-12 text-center">
             This project is developed by Prysiazhniuk Roman as a test task for Panda Team.
         </div>
         <?php if(isset($_SESSION['login'])): ?>
